@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit User</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body class="bg-gray-900 text-gray-100 flex flex-col min-h-screen">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-gray-800 text-gray-200 shadow-md">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <h1 class="text-2xl font-semibold">UserDetails</h1>
+      <div class="space-x-4 flex">
+        <a href="/" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out flex items-center">
+          <span class="material-symbols-outlined mr-2">add</span> Create User
+        </a>
+        <a href="/read" class="bg-gray-700 text-gray-100 py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300 ease-in-out flex items-center">
+          <span class="material-symbols-outlined mr-2">people</span> View Users
+        </a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Main Content -->
+  <div class="flex-grow flex items-center justify-center py-8 px-4">
+    <div class="bg-gray-800 text-gray-200 rounded-xl shadow-lg w-full max-w-4xl flex">
+      
+      <!-- Old User Data (Read-Only) -->
+      <div class="flex-none w-1/2 bg-gray-700 p-8 rounded-l-xl">
+        <h2 class="text-2xl font-semibold mb-4">Current User Data</h2>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-400 mb-1">Username</label>
+          <p class="bg-gray-600 border border-gray-500 text-gray-100 py-3 px-4 rounded-lg"><%= user.name %></p>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-400 mb-1">Email</label>
+          <p class="bg-gray-600 border border-gray-500 text-gray-100 py-3 px-4 rounded-lg"><%= user.email %></p>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-400 mb-1">Image URL</label>
+          <img src="<%= user.image %>" alt="Current User Image" class="w-full h-auto rounded-lg border border-gray-500"/>
+        </div>
+      </div>
+
+      <!-- Update User Form -->
+      <div class="flex-1 bg-gray-800 p-8 rounded-r-xl">
+        <h2 class="text-2xl font-semibold mb-6">Update User Data</h2>
+        <form action="/update/<%= user._id %>" method="POST" class="space-y-6">
+          <div>
+            <label for="username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+            <input type="text" id="username" name="name" placeholder="Enter new username"
+              class="bg-gray-700 border border-gray-600 text-gray-100 py-3 px-4 rounded-lg w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter new email"
+              class="bg-gray-700 border border-gray-600 text-gray-100 py-3 px-4 rounded-lg w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div>
+            <label for="image-url" class="block text-sm font-medium text-gray-400 mb-2">Image URL</label>
+            <input type="url" id="image-url" name="image" placeholder="Enter new image URL"
+              class="bg-gray-700 border border-gray-600 text-gray-100 py-3 px-4 rounded-lg w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+          </div>
+          <button type="submit"
+            class="bg-blue-600 text-white py-3 px-4 rounded-lg w-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out flex items-center justify-center">
+            <span class="material-symbols-outlined mr-2">save</span> Save Changes
+          </button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+</body>
+
+</html>

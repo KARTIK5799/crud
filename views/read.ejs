@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Users</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body class="bg-gray-900 flex flex-col min-h-screen">
+  <!-- Navigation Bar -->
+  <nav class="bg-gray-800 text-gray-200 shadow-md">
+    <div class="container mx-auto flex items-center justify-between p-4">
+      <h1 class="text-2xl font-semibold">UserDetails</h1>
+
+      <!-- Search Bar -->
+      <div class="hidden md:flex flex-1 mx-8">
+        <input type="text" placeholder="Search users..."
+          class="bg-gray-700 border border-gray-600 text-gray-100 py-3 px-4 rounded-lg w-full focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+      </div>
+
+      <div class="space-x-4 flex items-center">
+        <a href="/" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out flex items-center">
+          <span class="material-symbols-outlined mr-2">add</span> Create User
+        </a>
+        <a href="/read" class="bg-gray-700 text-gray-100 py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-300 ease-in-out flex items-center">
+          <span class="material-symbols-outlined mr-2">people</span> View Users
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- User Cards -->
+  <div class="flex flex-wrap justify-center gap-6 max-w-full p-4">
+    <% if (allUsers.length === 0) { %>
+      <!-- No Users Found -->
+      <div class="flex flex-col items-center justify-center h-screen">
+        <span class="material-symbols-outlined text-6xl text-gray-500 mb-4">sentiment_dissatisfied</span>
+        <p class="text-xl text-gray-400 mb-4">No users yet. You can add users by clicking on the Create User button.</p>
+        <a href="/" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out flex items-center">
+          <span class="material-symbols-outlined mr-2">add</span> Create User
+        </a>
+      </div>
+    <% } else { %>
+      <% allUsers.forEach(function(user){ %>
+        <div class="relative flex flex-col rounded-xl bg-gray-800 text-gray-200 shadow-lg max-w-xs w-full flex-shrink-0">
+          <div class="relative mx-4 mt-4 overflow-hidden rounded-xl bg-gray-700 text-white">
+            <img
+              src="<%= user.image %>"
+              alt="User profile picture" class="w-full h-48 object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-black/60"></div>
+          </div>
+          <div class="p-6">
+            <h5 class="text-xl font-semibold text-gray-100 mb-2">
+              <%= user.name %>
+            </h5>
+            <p class="text-base text-gray-400">
+              <%= user.email %>
+            </p>
+          </div>
+          <div class="flex p-6 gap-4">
+            <!-- Edit Button -->
+            <a href="/edit/<%= user._id %>" class="bg-blue-600 text-white py-3 px-4 rounded-lg w-full hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out flex items-center justify-center">
+              <span class="material-symbols-outlined">edit</span> Edit
+            </a>
+            <!-- Delete Button -->
+            <a href="/delete/<%= user._id %>" class="bg-red-600 text-white py-3 px-4 rounded-lg w-full hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 transition duration-300 ease-in-out flex items-center justify-center">
+              <span class="material-symbols-outlined">delete</span> Delete
+            </a>
+          </div>
+        </div>
+      <% }) %>
+    <% } %>
+  </div>
+
+</body>
+
+</html>
